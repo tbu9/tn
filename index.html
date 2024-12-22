@@ -12,7 +12,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <!-- My Style -->
-    <link rel="stylesheet" href="./style/main.css" />
+    <link rel="stylesheet" href="./style/main.css"/>
+    <script>
+        // Password protection
+        const password = "paglu"; // Set your desired password here
+        let userPassword = prompt("Please enter the password to access this page:");
+    
+        if (userPassword !== password) {
+            alert("Welcome");
+            window.location.href = "https://scholarships.gov.in/"; // Redirect to a blank page or any other page
+        }
+    </script>
 </head>
 
 <body>
