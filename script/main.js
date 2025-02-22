@@ -9,12 +9,14 @@ window.addEventListener('load', () => {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
     }).then((result) => {
-        if (result.isConfirmed) {
-            document.querySelector('.song').play();
-            animationTimeline();
-        } else {
-            animationTimeline();
-        }
+        // script/main.js
+if (result.isConfirmed) {
+    document.querySelector('.song').play();
+    animationTimeline();
+  } else {
+    // do nothing, don't play the audio
+    animationTimeline();
+  }
     });
 });
 
