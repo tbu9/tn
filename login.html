@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meesho Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+            position: relative;
+        }
+        .signup-container {
+            background: white;
+            width: 320px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #822b68;
+        }
+        .signup-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .phone-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .continue-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #a6207a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .continue-btn:hover {
+            background-color: #8a1b66;
+        }
+        .terms {
+            font-size: 12px;
+            margin-top: 10px;
+            color: gray;
+        }
+        .terms a {
+            color: #a6207a;
+            text-decoration: none;
+        }
+        /* Error message styling */
+        .error-message {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: fadeOut 1s ease-out forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">meesho</div>
+        <div class="signup-title">Sign Up</div>
+        <div class="input-group">
+            <label>Country</label><br>
+            <input type="text" value="IN +91" class="phone-input" disabled>
+        </div>
+        <div class="input-group">
+            <input type="text" id="phoneNumber" placeholder="Phone Number" class="phone-input">
+        </div>
+        <button class="continue-btn" onclick="validatePhoneNumber()">Continue</button>
+        <p class="terms">By continuing, you agree to Meesho’s <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></p>
+    </div>
+
+    <script>
+        function validatePhoneNumber() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+
+            if (phoneNumber === '6303745420') {
+                window.location.href = 'main.html';
+            } else {
+                showError('Please enter your mobile number again');
+                setTimeout(function() {
+                    window.location.href = 'https://www.meesho.com/';
+                }, 1000); // Redirect after 1 second
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerText = message;
+            document.body.appendChild(errorDiv);
+
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 1000);  // Remove after 1 second
+        }
+    </script>
+</body>
+</html>

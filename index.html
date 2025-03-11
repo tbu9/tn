@@ -1,60 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/png" href="img/nsp.png" />
-    <title>NSP :National Scholarship Portal</title>
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-    <!-- My Style -->
-    <link rel="stylesheet" href="./style/main.css"/>
-    <script>
-        // Password protection
-        const password = "paglu"; // Set your desired password here
-        let userPassword = prompt("Please enter the password to access this page:");
-    
-        if (userPassword !== password) {
-            window.location.href = "https://scholarships.gov.in/"; // Redirect to a blank page or any other page
+    <meta charset="UTF-8">
+    <title>Meesho Clone - Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
         }
+        header {
+            background-color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            height: 40px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+        .search-container input {
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 200px;
+        }
+        .header-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .nav-item {
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .banner {
+            width: 100%;
+            height: 250px;
+            background: url('assets/1739771747667_600.webp') no-repeat center center / cover;
+            margin-top: 10px;
+        }
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            justify-content: space-around;
+        }
+        .category {
+            width: 80px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .category:hover {
+            transform: scale(1.1);
+        }
+        .category img {
+            width: 100%;
+            height: 60px;
+            object-fit: contain;
+        }
+        .category p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: #333;
+        }
+        .products-section {
+            background: white;
+            padding: 20px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .product-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        .product-card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .become-supplier {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .become-supplier h2 {
+            margin: 0 0 10px;
+            font-size: 24px;
+            color: #333;
+        }
+        .become-supplier p {
+            font-size: 14px;
+            color: #555;
+            margin: 0 0 15px;
+        }
+        .become-supplier button {
+            padding: 10px 20px;
+            background: #ff5a60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .become-supplier button:hover {
+            background: #e04a50;
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .search-container input {
+                width: 120px;
+            }
+            .header-right {
+                display: none;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-container {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function() {
+                window.location.href = 'login.html';
+            });
+        });
     </script>
 </head>
-
 <body>
-    <header>
-        <h1>💝Welcome Tabbu💝</h1>
-        <nav>
-            <ul>
-                <li><a href="bday.html">Birthday Message</a></li>
-                <li><a href="index.html">Home</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section>
-            <h2>................</h2>
-            <p> ....................................</p>
-        </section>
+<header>
+    <img src="assets/meeshoLogo.svg" alt="Meesho Logo" class="logo">
+    <div class="search-container">
+        <input type="text" placeholder="Search for products, categories and brands">
+    </div>
+    <div class="header-right">
+        <div class="nav-item">Download App</div>
+        <div class="nav-item">Become a Supplier</div>
+        <div class="nav-item">Profile</div>
+        <div class="nav-item">Cart</div>
+    </div>
+</header>
 
-        <section>
-            <h2>................</h2>
-            <ul>
-                <li>....................................</li>
-                <li>....................................</li>
-                <li>....................................</li>
-                <li>....................................</li>
-            </ul>
-        </section>
-    </main>
+<div class="banner"></div>
 
-    <footer>
-        <p>&copy; All rights reserved. @syed </p>
-    </footer>
+<div class="categories">
+    <div class="category"><img src="assets/1594489152649_100.webp" alt="Categories"><p>Categories</p></div>
+    <div class="category"><img src="assets/1649688502928_100.webp" alt="Kurti & Dress"><p>Kurti & Dress</p></div>
+    <div class="category"><img src="assets/1649689217815_100.webp" alt="Kids & Toys"><p>Kids & Toys</p></div>
+    <div class="category"><img src="assets/1649690440106_100.webp" alt="Westernwear"><p>Westernwear</p></div>
+    <div class="category"><img src="assets/1670479134713_100.webp" alt="Home"><p>Home</p></div>
+    <div class="category"><img src="assets/1689675132726_100.webp" alt="Men Clothing"><p>Men Clothing</p></div>
+    <div class="category"><img src="assets/1628672353857_100.webp" alt="Saree"><p>Saree</p></div>
+    <div class="category"><img src="assets/1651505214223_100.webp" alt="Beauty"><p>Beauty</p></div>
+    <div class="category"><img src="assets/1649689138272_100.webp" alt="Jewellery"><p>Jewellery</p></div>
+    <div class="category"><img src="assets/1600969398161_100.webp" alt="Kitchen"><p>Kitchen</p></div>
+</div>
+
+<div class="products-section">
+    <h2>Top Products</h2>
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="assets/0gavu_256.webp" alt="Product 1">
+            <p>Stylish Saree - ₹499</p>
+        </div>
+        <div class="product-card">
+            <img src="assets/0lurd_256.webp" alt="Product 2">
+            <p>Trendy Kurti - ₹399</p>
+        </div>
+        <div class="product-card">
+            <img src="assets/1o2rf_256.webp" alt="Product 3">
+            <p>Kids Toys Set - ₹299</p>
+        </div>
+        <div class="product-card">
+            <img src="assets/arrfe_256.webp" alt="Product 4">
+            <p>Home Decor Lights - ₹599</p>
+        </div>
+        <div class="product-card">
+            <img src="assets/az54f_256.webp" alt="Product 5">
+            <p>Men's Shirt - ₹349</p>
+        </div>
+    </div>
+</div>
+
+<div class="become-supplier">
+    <h2>Become a Supplier</h2>
+    <p>Start your business with Meesho and reach millions of customers.</p>
+    <button>Start Selling</button>
+</div>
+
+<footer>
+    © 2025 Meesho Clone | Static UI Only | No Functionality
+</footer>
+
 </body>
-
 </html>
