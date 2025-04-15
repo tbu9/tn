@@ -2,59 +2,169 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/png" href="img/nsp.png" />
-    <title>NSP :National Scholarship Portal</title>
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-    <!-- My Style -->
-    <link rel="stylesheet" href="./style/main.css"/>
-    <script>
-        // Password protection
-        const password = "paglu"; // Set your desired password here
-        let userPassword = prompt("Please enter the password to access this page:");
-    
-        if (userPassword !== password) {
-            window.location.href = "https://scholarships.gov.in/"; // Redirect to a blank page or any other page
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" type="image/png" href="img/nsp.png" />
+  <title>NSP :National Scholarship Portal</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- My Style -->
+  <link rel="stylesheet" href="./style/main.css" />
+
+  <script>
+    // Password protection
+    const password = "paglu";
+    let userPassword = prompt("Please enter the password to access this page:");
+    if (userPassword !== password) {
+      window.location.href = "https://scholarships.gov.in/";
+    }
+  
+    document.addEventListener('DOMContentLoaded', function () {
+      const items = document.querySelectorAll('.nav-item');
+      const underline = document.querySelector('.underline');
+      const tabContent = document.getElementById("tab-content");
+  
+      const tabInfo = {
+        marketing: {
+          title: "Marketing",
+          content: "Empower your marketing team with AI-powered automation and analytics."
+        },
+        sales: {
+          title: "Sales",
+          content: "Streamline your sales processes using intelligent lead scoring and smart follow-ups."
+        },
+        engineering: {
+          title: "Engineering",
+          content: "Assist your engineering team with code generation, documentation, and debugging."
+        },
+        birthday: {
+          iframe: "bday.html"
         }
-    </script>
+      };
+  
+      function updateUnderline(el) {
+        const parent = document.querySelector('.nav-bar');
+        const offsetLeft = el.offsetLeft - parent.offsetLeft;
+        const width = el.offsetWidth;
+  
+        underline.style.left = offsetLeft + 'px';
+        underline.style.width = width + 'px';
+      }
+  
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          items.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          updateUnderline(item);
+  
+          const tabKey = item.getAttribute('data-tab');
+          const info = tabInfo[tabKey];
+  
+          if (info) {
+            if (info.iframe) {
+              tabContent.innerHTML = `
+                <iframe src="${info.iframe}" width="100%" height="600px" style="border:none;"></iframe>
+              `;
+            } else {
+              tabContent.innerHTML = `
+                <h2>${info.title}</h2>
+                <p>${info.content}</p>
+              `;
+            }
+          }
+        });
+      });
+  
+      // Initialize on page load
+      const activeItem = document.querySelector('.nav-item.active');
+      if (activeItem) {
+        setTimeout(() => {
+          updateUnderline(activeItem);
+          const tabKey = activeItem.getAttribute('data-tab');
+          const info = tabInfo[tabKey];
+          if (info) {
+            if (info.iframe) {
+              tabContent.innerHTML = `
+                <div class="iframe-wrapper">
+               <iframe src="${info.iframe}" scrolling="no"></iframe>
+                </div>
+              `;
+            } else {
+              tabContent.innerHTML = `
+                <h2>${info.title}</h2>
+                <p>${info.content}</p>
+              `;
+            }
+          }
+        }, 100);
+      }
+    });
+  </script>
+  
+  
 </head>
 
 <body>
-    <header>
-        <h1>💝Welcome Tabbu💝</h1>
-        <nav>
-            <ul>
-                <li><a href="bday.html">Birthday Message</a></li>
-                <li><a href="index.html">Home</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>💝Welcome Tabbu💝</h1>
 
-    <main>
-        <section>
-            <h2>................</h2>
-            <p> ....................................</p>
-        </section>
+    <!-- AI-style navbar with icons and underline -->
+    <div class="nav-wrapper">
+      <div class="nav-bar">
+        <div class="nav-item active" data-tab="marketing">
+          <i class="fas fa-bullhorn"></i>
+          <span>Marketing</span>
+        </div>
+        <div class="nav-item" data-tab="sales">
+          <i class="fas fa-file-invoice-dollar"></i>
+          <span>Sales</span>
+        </div>
+        <div class="nav-item" data-tab="engineering">
+          <i class="fas fa-laptop-code"></i>
+          <span>Engineering</span>
+        </div>
+        <div class="nav-item" data-tab="birthday">
+          <i class="fas fa-gift"></i>
+          <span>Birthday Wishes</span>
+        </div>
+      </div>
+      <div class="underline"></div>
+    </div>
+  </header>
 
-        <section>
-            <h2>................</h2>
-            <ul>
-                <li>....................................</li>
-                <li>....................................</li>
-                <li>....................................</li>
-                <li>....................................</li>
-            </ul>
-        </section>
-    </main>
+  <!-- Dynamic tab content area -->
+  <div id="tab-content" class="tab-content">
+    <h2>Marketing</h2>
+    <p>Empower your marketing team with AI-powered automation and analytics.</p>
+  </div>
 
-    <footer>
-        <p>&copy; All rights reserved. @syed </p>
-    </footer>
+  <main>
+    <section>
+      <h2>................</h2>
+      <p> ....................................</p>
+    </section>
+
+    <section>
+      <h2>................</h2>
+      <ul>
+        <li>....................................</li>
+        <li>....................................</li>
+        <li>....................................</li>
+        <li>....................................</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; All rights reserved. @syed</p>
+  </footer>
 </body>
-
 </html>
