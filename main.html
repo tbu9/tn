@@ -19,96 +19,94 @@
   <!-- My Style -->
   <link rel="stylesheet" href="./style/main.css" />
 
-  <script>
-    // Password protection
-    const password = "paglu";
-    let userPassword = prompt("Please enter the password to access this page:");
-    if (userPassword !== password) {
-      window.location.href = "https://scholarships.gov.in/";
+ <script>
+  // Password protection
+  const password = "paglu";
+  let userPassword = prompt("Please enter the password to access this page:");
+  if (userPassword !== password) {
+    window.location.href = "https://scholarships.gov.in/";
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const items = document.querySelectorAll('.nav-item');
+    const underline = document.querySelector('.underline');
+    const tabContent = document.getElementById("tab-content");
+
+    const tabInfo = {
+      marketing: {
+        title: "Marketing",
+        content: "Empower your marketing team with AI-powered automation and analytics."
+      },
+      sales: {
+        title: "Sales",
+        content: "Streamline your sales processes using intelligent lead scoring and smart follow-ups."
+      },
+      engineering: {
+        title: "Engineering",
+        content: "Assist your engineering team with code generation, documentation, and debugging."
+      },
+      birthday: {
+        iframe: "bday.html"
+      }
+    };
+
+    function updateUnderline(el) {
+      const parent = document.querySelector('.nav-bar');
+      const offsetLeft = el.offsetLeft - parent.offsetLeft;
+      const width = el.offsetWidth;
+
+      underline.style.left = offsetLeft + 'px';
+      underline.style.width = width + 'px';
     }
-  
-    document.addEventListener('DOMContentLoaded', function () {
-      const items = document.querySelectorAll('.nav-item');
-      const underline = document.querySelector('.underline');
-      const tabContent = document.getElementById("tab-content");
-  
-      const tabInfo = {
-        marketing: {
-          title: "Marketing",
-          content: "Empower your marketing team with AI-powered automation and analytics."
-        },
-        sales: {
-          title: "Sales",
-          content: "Streamline your sales processes using intelligent lead scoring and smart follow-ups."
-        },
-        engineering: {
-          title: "Engineering",
-          content: "Assist your engineering team with code generation, documentation, and debugging."
-        },
-        birthday: {
-          iframe: "bday.html"
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        items.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        updateUnderline(item);
+
+        const tabKey = item.getAttribute('data-tab');
+        const info = tabInfo[tabKey];
+
+        if (info) {
+          if (info.iframe) {
+            tabContent.innerHTML = `
+              <iframe src="${info.iframe}" width="100%" height="600px" style="border:none;"></iframe>
+            `;
+          } else {
+            tabContent.innerHTML = `
+              <h2>${info.title}</h2>
+              <p>${info.content}</p>
+            `;
+          }
         }
-      };
-  
-      function updateUnderline(el) {
-        const parent = document.querySelector('.nav-bar');
-        const offsetLeft = el.offsetLeft - parent.offsetLeft;
-        const width = el.offsetWidth;
-  
-        underline.style.left = offsetLeft + 'px';
-        underline.style.width = width + 'px';
-      }
-  
-      items.forEach(item => {
-        item.addEventListener('click', () => {
-          items.forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
-          updateUnderline(item);
-  
-          const tabKey = item.getAttribute('data-tab');
-          const info = tabInfo[tabKey];
-  
-          if (info) {
-            if (info.iframe) {
-              tabContent.innerHTML = `
-                <iframe src="${info.iframe}" width="100%" height="600px" style="border:none;"></iframe>
-              `;
-            } else {
-              tabContent.innerHTML = `
-                <h2>${info.title}</h2>
-                <p>${info.content}</p>
-              `;
-            }
-          }
-        });
       });
-  
-      // Initialize on page load
-      const activeItem = document.querySelector('.nav-item.active');
-      if (activeItem) {
-        setTimeout(() => {
-          updateUnderline(activeItem);
-          const tabKey = activeItem.getAttribute('data-tab');
-          const info = tabInfo[tabKey];
-          if (info) {
-            if (info.iframe) {
-              tabContent.innerHTML = `
-                <div class="iframe-wrapper">
-               <iframe src="${info.iframe}" scrolling="no"></iframe>
-                </div>
-              `;
-            } else {
-              tabContent.innerHTML = `
-                <h2>${info.title}</h2>
-                <p>${info.content}</p>
-              `;
-            }
-          }
-        }, 100);
-      }
     });
-  </script>
-  
+
+    // Initialize on page load
+    const activeItem = document.querySelector('.nav-item.active');
+    if (activeItem) {
+      setTimeout(() => {
+        updateUnderline(activeItem);
+        const tabKey = activeItem.getAttribute('data-tab');
+        const info = tabInfo[tabKey];
+        if (info) {
+          if (info.iframe) {
+            tabContent.innerHTML = `
+              <iframe src="${info.iframe}" width="100%" height="600px" style="border:none;"></iframe>
+            `;
+          } else {
+            tabContent.innerHTML = `
+              <h2>${info.title}</h2>
+              <p>${info.content}</p>
+            `;
+          }
+        }
+      }, 100);
+    }
+  });
+</script>
+
   
 </head>
 
@@ -138,6 +136,14 @@
       </div>
       <div class="underline"></div>
     </div>
+
+    <!-- Original site nav -->
+    <nav>
+      <ul>
+        <li><a href="bday.html">Birthday Message</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- Dynamic tab content area -->
